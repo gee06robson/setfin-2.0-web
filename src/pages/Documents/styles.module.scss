@@ -1,0 +1,23 @@
+.documentBoxWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #e8eaed;
+
+  position: relative;
+
+  padding: 60px 0 20px 0;
+  overflow: auto;
+  overflow-x: hidden;
+
+  @media only screen and (max-width: 700px) {
+    background-color: #FFFFFF;
+  }
+
+  @media print {
+    padding: 0;
+    overflow: visible;
+  } 
+}
+

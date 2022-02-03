@@ -1,0 +1,227 @@
+div {
+  .contentAlertExtractEmpty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    padding: 20px 30px;
+    gap: 20px;
+
+    background: #FFF url(../../assets/alert-extract.svg) no-repeat left top;
+    border-radius: 12px;
+
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);
+
+    button {
+      background-image: linear-gradient(120deg, #8ec5fc 0%, #e0c3fc 100%);
+
+      height: 24px;
+      line-height: 24px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      
+      border: 0;
+
+      padding: 24px;
+
+      border-radius: 6px;
+
+      box-shadow: 0 6px 15px rgb(36 37 38 / 8%);
+
+      &:nth-child(1) {
+        background: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+
+        span {
+          color: #505b6d;
+        }
+      }
+
+      cursor: pointer;
+      span {
+        color: #424852;
+        font-weight: bold;
+        font-size: 16px;
+
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .contentPageExtract {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 350px);
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+
+    background-color: transparent;
+
+
+    .cardDocument {
+      width: 350px;
+      min-width: 350px;
+  
+      height: auto;
+      min-height: 450px;
+  
+      display: flex;
+      flex-direction: column;
+  
+      padding: 20px 10px;
+      border-radius: 8px;
+    
+      background-color: #d3e6f7;
+      border: 2px dashed #2c88d9;
+      gap: 10px;
+  
+      text-transform: uppercase;
+  
+      position: relative;
+      cursor: pointer;
+  
+      .contentDataCreditorDocument {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 4px;
+  
+        .textCreditorData {
+          display: flex;
+          flex-direction: column;
+  
+          span {
+            white-space: nowrap; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+  
+            font-weight: bold;
+          }
+        }
+  
+        @media print {
+          font-size: 14px;
+        }
+      }
+  
+      .contentDataDocument {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 4px;
+  
+        .textDocumentData {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+  
+          :nth-child(1) {
+            font-weight: bold;
+            text-transform: uppercase;
+          }
+        }
+  
+        @media print {
+          font-size: 14px;
+        }
+      }
+  
+      .tableTaxesOnDocument {
+        border: 2px dashed #d3455b;
+        border-radius: 8px;
+  
+        th, td {
+          text-align: center;
+          padding: 4px;
+          background-color: #f6d8dd;
+          border-bottom: 2px dashed #d3455b;
+        }
+  
+        tr.textLiq {
+          td { 
+            border: 0;
+          }
+        }
+
+        tr.textTotal,
+        tr.textLiq {
+          td {
+            font-size: 14px;
+            &:nth-child(1) {
+              font-weight: bold;
+            } 
+          }
+        }
+
+        @media print {
+          border: 1px dashed #000;
+          border-radius: 0px;
+          font-size: 12px;
+
+          th, td {
+            font-weight: bold;
+            text-align: center;
+            padding: 2px;
+            background-color: transparent;
+            border-bottom: 1px dashed #000;
+          }
+          
+          tr.textTotal,
+          tr.textLiq {
+            td {
+              font-size: 12px;
+              &:nth-child(1) {
+                font-weight: bold;
+              } 
+            }
+          }
+        }
+      }
+  
+      @media print {
+        width: 270px;
+        max-width: 270px;
+        min-width: 270px;
+    
+        height: 380px;
+        max-height: 380px;
+        min-height: 380px;
+  
+        font-size: 16px;
+        background-color: transparent;
+        box-shadow: none;
+        border: 2px dashed #000000;
+        border-radius: 0;
+        padding-bottom: 0px;
+  
+        align-self: flex-start;
+        justify-self: flex-start;
+        flex-wrap: wrap;
+  
+      }
+    }
+
+    @media print {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2px;
+
+      page-break-after: always;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "web-financeiro",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@hookform/error-message": "^2.0.0",
+    "animate.css": "^4.1.1",
+    "axios": "^0.24.0",
+    "date-fns": "^2.27.0",
+    "date-fns-tz": "^1.1.6",
+    "jquery": "^3.6.0",
+    "jquery-mask-plugin": "^1.14.16",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-hook-form": "^7.20.5",
+    "react-icons": "^4.3.1",
+    "react-router-dom": "^6.0.2",
+    "sass": "^1.43.4",
+    "sweetalert2": "^11.3.6"
+  },
+  "devDependencies": {
+    "@types/jquery-mask-plugin": "^1.14.4",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@vitejs/plugin-react": "^1.0.0",
+    "typescript": "^4.3.2",
+    "vite": "^2.6.4"
+  }
+}

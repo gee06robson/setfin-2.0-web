@@ -1,0 +1,83 @@
+.loginBoxWrapper {
+  height: 100vh;
+  width: 100%;
+  background: #FFFFFF;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .loginContentBox {
+    width: 500px;
+    height: 550px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    border-radius: 8px;
+
+    .contentImageBox {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      gap: 24px;
+
+      img {
+        width: 150px;
+        // filter: drop-shadow(0px 8px 4px rgb(88, 88, 88));
+      }
+
+      .contentTitle {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        gap: 6px;
+
+        span:nth-child(1) {
+          font-weight: bold;
+          font-size: 18px;
+        }
+      }
+
+      .contentButtonLogin {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          
+          text-decoration: none;
+          
+          background-color: rgb(88, 88, 88);
+
+          padding: 8px 10px;
+          border-radius: 4px;
+          box-shadow: 0 2px 4px rgb(39, 39, 39);
+
+          span {
+            font-weight: bold;
+            color: #babbc2;
+            transition: color 0.5s;
+          }
+        }
+
+        a:hover span {
+          color: #79b4be;
+        }
+      }
+    }
+  }
+}
