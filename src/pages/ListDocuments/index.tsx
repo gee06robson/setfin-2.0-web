@@ -5,6 +5,7 @@ import { format, parseISO } from "date-fns"
 import { CurrencyFormat, HandleErrorResponseApi } from "../../Utils/utils"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
+import { Loading } from "../../components/Load"
 
 interface Creditor {
   name: string
@@ -36,6 +37,10 @@ interface IFormInputs {
   id: string[]
 }
 
+interface IDataDocumentResponse {
+  data: IDocumentData[]
+}
+
 export const ListDocuments = () => {
   const [isLoading, setLoading] = useState<boolean>(true)
   const [take, setTake] = useState<number>(8)
@@ -55,15 +60,20 @@ export const ListDocuments = () => {
 
   useEffect(() => {
     const getDocuments = async () => {
-      const result = await api.post("/documents", { 
+      setLoading(true)
+      await api.post("/documents", { 
         take
+      }).then(response => {
+        const { data } = response as IDataDocumentResponse
+        setDocument(data)
+        setLoading(false)
+      }).catch(error => {
+        setLoading(false)
+        HandleErrorResponseApi(error)
       })
-
-      setLoading(false)
-      setDocument(result.data)
-    }
-
-    getDocuments().catch(error => HandleErrorResponseApi(error))
+    } 
+    
+    getDocuments()
 
   }, [take])
 
@@ -83,7 +93,7 @@ export const ListDocuments = () => {
 
   return (
     <div className={styles.contentBoxListDocuments}>
-      
+      {isLoading && <Loading />}
       <div className={styles.contentTitleListDocuments}>
         <div className={styles.contentDateDocument}>
           <h2>Documentos</h2>
@@ -98,15 +108,9 @@ export const ListDocuments = () => {
           </button>
 
           <div className={styles.contentPaginationBox}>
-            {isLoading 
-              ? <button type="button">
-                  <span>Carregando...</span>
-                </button> 
-
-              : <button type="button" onClick={() => setTake(take + 8) }>
-                  <span>Mostrando {document.length} resultados</span>
-                </button>
-            }
+           <button type="button" onClick={() => setTake(take + 8) }>
+              <span>Mostrando {document.length} resultados</span>
+            </button>
           </div>
 
         </div>

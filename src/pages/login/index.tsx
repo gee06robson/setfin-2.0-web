@@ -17,27 +17,31 @@ export const Login = () => {
   }
 
   useEffect(() => {
-    
-    if (!window?.[scriptFlag] && window.google && script === 'ready' && !checkUser(user)) {
-      window.google.accounts.id.initialize({
-        client_id: VITE_GOOGLE_CLIENT_ID,
-        callback: signIn
-      })
 
-      window[scriptFlag] = true
+    const check = async () => {
+      if (!window?.[scriptFlag] && window.google && script === 'ready' && !checkUser(user)) {
+        await window.google.accounts.id.initialize({
+          client_id: VITE_GOOGLE_CLIENT_ID,
+          callback: signIn
+        })
+  
+        window[scriptFlag] = true
+      }
+  
+      if (window?.[scriptFlag] && script === 'ready' && !checkUser(user)) {
+  
+        await window.google.accounts.id.renderButton(document.getElementById("buttonDiv"), { 
+          theme: "outline", 
+          size: "large", 
+          shape: "square" 
+        })
+  
+        await window.google.accounts.id.prompt()
+  
+      }
     }
 
-    if (window?.[scriptFlag] && script === 'ready' && !checkUser(user)) {
-
-      window.google.accounts.id.renderButton(document.getElementById("buttonDiv"), { 
-        theme: "outline", 
-        size: "large", 
-        shape: "square" 
-      })
-
-      window.google.accounts.id.prompt()
-
-    }
+    check()    
 
   }, [script, window?.[scriptFlag]])
 

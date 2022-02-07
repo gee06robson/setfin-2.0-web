@@ -7,6 +7,7 @@ import "jquery-mask-plugin/dist/jquery.mask.min"
 import styles from "./styles.module.scss"
 import { breakApart, CurrencyFormat, HandleErrorResponseApi, SPMaskBehavior } from "../../Utils/utils"
 import { useNavigate } from "react-router-dom"
+import { Loading } from "../../components/Load"
 
 interface Creditor {
   name: string
@@ -48,17 +49,24 @@ interface IResponseData {
 }
 
 export const ExtractDocument = () => {
+  const [isLoading, setLoading] = useState<boolean>(true)
   const [documents, setDocuments] = useState<IDocumentData[]>([])
   const id_documents = JSON.parse(localStorage.getItem('@financeiro:selectedDocuments')!)
   const navigate = useNavigate()
 
   useEffect(() => {
     const getDocuments = async () => {
-      const { data } = await api.post("/documents/filter", { id_documents }) as IResponseData
-      setDocuments(data)
+      await api.post("/documents/filter", { id_documents }).then(response => {
+        const { data } = response as IResponseData
+        setDocuments(data)
+        setLoading(false)
+      }).catch(error => {
+        setLoading(false)
+        HandleErrorResponseApi(error)
+      })
     }
 
-    getDocuments().catch(error => HandleErrorResponseApi(error))
+    getDocuments()
   }, [])
 
   useEffect(() => {
@@ -69,6 +77,8 @@ export const ExtractDocument = () => {
   return (
     <div>
 
+      {isLoading && <Loading />}
+      
       {id_documents.length === 0 && 
         <div className={styles.contentAlertExtractEmpty}>
           <VscEmptyWindow size={48} color="#915ce6" />
@@ -91,6 +101,8 @@ export const ExtractDocument = () => {
                   <span className="code">{document.creditor.code}</span>
                 </div>
               </div>
+
+              <div className={styles.break} />
 
               <div className={styles.contentDataDocument}>
 

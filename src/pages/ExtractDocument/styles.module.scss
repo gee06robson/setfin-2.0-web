@@ -113,6 +113,19 @@ div {
           font-size: 14px;
         }
       }
+
+      .break {
+        align-self: center;
+        width: 100px;
+        padding: 2px 0;
+        background-color: rgba(44, 136, 217, .4);
+        border-radius: 12px;
+
+        @media print {
+
+          display: none;
+        } 
+      }
   
       .contentDataDocument {
         width: 100%;
@@ -126,15 +139,19 @@ div {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          padding: 2px 0;
+          border-bottom: 2px dashed #2c88d9;
   
           :nth-child(1) {
             font-weight: bold;
             text-transform: uppercase;
           }
         }
-  
+
         @media print {
-          font-size: 14px;
+          .textDocumentData {
+            border-bottom: 1px dotted #000;
+          }
         }
       }
   
@@ -166,7 +183,7 @@ div {
         }
 
         @media print {
-          border: 1px dashed #000;
+          border: 1px dotted #000;
           border-radius: 0px;
           font-size: 12px;
 
@@ -191,18 +208,20 @@ div {
       }
   
       @media print {
-        width: 270px;
-        max-width: 270px;
-        min-width: 270px;
+        width: 255px;
+        max-width: 255px;
+        min-width: 255px;
     
-        height: 380px;
-        max-height: 380px;
-        min-height: 380px;
-  
-        font-size: 16px;
+        height: 345px;
+        max-height: 345px;
+        min-height: 345px;
+        
+        * {
+          font-size: 10px !important;
+        }
         background-color: transparent;
         box-shadow: none;
-        border: 2px dashed #000000;
+        border: 1px dotted #000000;
         border-radius: 0;
         padding-bottom: 0px;
   

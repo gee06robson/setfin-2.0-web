@@ -7,6 +7,7 @@ import "jquery-mask-plugin/dist/jquery.mask.min"
 import { api } from "../../services";
 import { useNavigate } from "react-router-dom"
 import { HandleErrorResponseApi, HandleValueData } from "../../Utils/utils"
+import { Loading } from "../../components/Load"
 
 
 interface IDocumentData {
@@ -23,12 +24,13 @@ interface ICreditorsName {
 }
 
 export const NewDocument = () => {
-  const token = localStorage.getItem("@financeiro:token")
+  const [isLoading, setLoading] = useState<boolean>(false)
   const [responseError, setResponseError] = useState<string>("")
   const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<IDocumentData>()
   const navigate = useNavigate()
 
   const onSubmit = (data: IDocumentData) => {
+    setLoading(true)
     data.value = HandleValueData(data.value)
 
     if(data.due_date==="") {
@@ -38,8 +40,12 @@ export const NewDocument = () => {
     api.post("/document", data).then(response => {
       const { id } = response.data
       reset()
+      setLoading(false)
       navigate(`/financial/document/success/${id}`)
-    }).catch(error => HandleErrorResponseApi(error))
+    }).catch(error => {
+      setLoading(false)
+      HandleErrorResponseApi(error)
+    })
   }
 
   useEffect(() => {
@@ -48,15 +54,18 @@ export const NewDocument = () => {
   }, [])
 
   const selectCreditor = async (code: string) => {
+    setLoading(true)
     await api.post("/select_creditor", { code }).then(response => {
       const { name } = response.data as ICreditorsName
       setResponseError("")
       setValue("name", name)
+      setLoading(false)
       document.getElementById("number")?.focus()
     }).catch(err => {
       const { data: message } = err.response
       setResponseError(message.error)
       setValue("name", "")
+      setLoading(false)
       document.getElementById("name")?.focus()
     })
   }
@@ -69,6 +78,9 @@ export const NewDocument = () => {
           <h2>Cadastro de Documentos</h2>
           <span>[Nota Fiscal, Fatura]</span>
         </div>
+
+        {isLoading && <Loading />}
+
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">

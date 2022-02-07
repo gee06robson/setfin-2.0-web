@@ -32,8 +32,7 @@ button {
   }
 
   @page{ 
-    size: A4 landscape; 
-    margin: 4mm !important; 
+    size: A4 landscape;  
   }
   body {
     background: #FFFFFF;

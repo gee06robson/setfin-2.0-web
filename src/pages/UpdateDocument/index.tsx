@@ -6,9 +6,10 @@ import $ from "jquery"
 import "jquery-mask-plugin/dist/jquery.mask.min"
 import { api } from "../../services";
 import { useNavigate, useParams } from "react-router-dom"
-import { HandleValueData, SPMaskBehavior } from "../../Utils/utils"
+import { HandleErrorResponseApi, HandleValueData, SPMaskBehavior } from "../../Utils/utils"
 import { format, parseISO } from "date-fns"
 import { ImOpt } from "react-icons/im"
+import { Loading } from "../../components/Load"
 
 
 type FormInputs = {
@@ -48,7 +49,7 @@ interface IDocumentData {
 export const UpdateDocument = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const [responseDocumentError, setResponseDocumentError] = useState<string | boolean>(false)
+  const [isLoading, setLoading] = useState<boolean>(true)
   const [document, setDocument] = useState<IDocumentData | null>(null)
   const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm<FormInputs>({
     defaultValues: {
@@ -57,44 +58,44 @@ export const UpdateDocument = () => {
   })
   
   useEffect(() => {
-    api.get<IDocumentData>(`/select_document/${id}`).then(response => {
-      let handleData = response.data
-        handleData.emission = format(parseISO(handleData.emission), 'dd/MM/yyyy')
-        if(handleData.due_date) {
-          handleData.due_date = format(parseISO(handleData.due_date), 'dd/MM/yyyy')
-          setValue("due_date", handleData.due_date)
-        }
-      setDocument(handleData)
-      setValue("number", handleData.number)
-      setValue("emission", handleData.emission)
-      setValue("value", Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2 }).format(Number(handleData.value)))
-    }).catch(err => {
-      const { data: message } = err.response
-      console.log(message.error)
-    })
+    const getDocument = async () => {
+      await api.get<IDocumentData>(`/select_document/${id}`).then(response => {
+        let handleData = response.data
+          handleData.emission = format(parseISO(handleData.emission), 'dd/MM/yyyy')
+          if(handleData.due_date) {
+            handleData.due_date = format(parseISO(handleData.due_date), 'dd/MM/yyyy')
+            setValue("due_date", handleData.due_date)
+          }
+        setDocument(handleData)
+        setValue("number", handleData.number)
+        setValue("emission", handleData.emission)
+        setValue("value", Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2 }).format(Number(handleData.value)))
+        setLoading(false)
+      }).catch(error => {
+        setLoading(false)
+        HandleErrorResponseApi(error)
+      })
+    }
+    
+    getDocument()
   }, [])
   
 
-  const onSubmit = (data: IDocumentData) => {
-    setResponseDocumentError(false)
+  const onSubmit = async (data: IDocumentData) => {
+    setLoading(true)
     data.value = HandleValueData(data.value)
 
     if(data.due_date==="") {
       data.due_date = null
     }
 
-    api.post("/document/update", data).then(response => {
+    await api.post("/document/update", data).then(() => {
       reset()
+      setLoading(false)
       navigate(-1)
-    }).catch(err => {
-      const { data: message } = err.response
-
-      if(message.error==="Invalid time value") {
-        setResponseDocumentError("data informada em [emissão / vencimento] inválida")
-      } else {
-        setResponseDocumentError(message.error)
-      }
-      
+    }).catch(error => {
+      setLoading(false)
+      HandleErrorResponseApi(error)
     })
   }
 
@@ -112,11 +113,9 @@ export const UpdateDocument = () => {
       <div className={styles.contentTitleForm}>
         <h2>Alterar Documento</h2>
         <span>[Nota Fiscal, Fatura]</span>
-        { responseDocumentError &&
-          <div className={`${styles.contentAlertBox} animate__animated animate__fadeIn`}>
-            <i>{responseDocumentError}</i> 
-          </div>
-        }
+
+        {isLoading && <Loading />}
+        
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">

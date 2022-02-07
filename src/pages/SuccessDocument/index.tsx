@@ -6,7 +6,8 @@ import { api } from "../../services"
 import $ from "jquery"
 import "jquery-mask-plugin/dist/jquery.mask.min"
 import styles from "./styles.module.scss"
-import { CurrencyFormat, SPMaskBehavior } from "../../Utils/utils"
+import { CurrencyFormat, HandleErrorResponseApi, SPMaskBehavior } from "../../Utils/utils"
+import { Loading } from "../../components/Load"
 
 
 interface Creditor {
@@ -35,24 +36,29 @@ interface IDocumentData {
 }
 
 export const SuccessDocument = () => {
+  const [isLoading, setLoading] = useState<boolean>(true)
   const [document, setDocument] = useState<IDocumentData | null>(null)
   const { id } = useParams()
   const navigate = useNavigate()
   
   useEffect(() => {
+    const getDocument = async () => {
+      await api.get<IDocumentData>(`/select_document/${id}`).then(response => {
+        let handleData = response.data
+            handleData.emission = format(parseISO(handleData.emission), 'dd/MM/yyyy')
+            if(handleData.due_date) {
+              handleData.due_date = format(parseISO(handleData.due_date), 'dd/MM/yyyy')
+            } 
+        setDocument(handleData)
+        setLoading(false)
+      }).catch(error => {
+        setLoading(false)
+        HandleErrorResponseApi(error)
+      })
+    }
 
-    api.get<IDocumentData>(`/select_document/${id}`).then(response => {
-      let handleData = response.data
-          handleData.emission = format(parseISO(handleData.emission), 'dd/MM/yyyy')
-          if(handleData.due_date) {
-            handleData.due_date = format(parseISO(handleData.due_date), 'dd/MM/yyyy')
-          } 
-      setDocument(handleData)
-    }).catch(err => {
-      const { data: message } = err.response
-      console.log(message.error)
-    })
-    
+    getDocument()
+
   }, [])
 
 
@@ -62,6 +68,8 @@ export const SuccessDocument = () => {
 
   return (
     <div className={styles.formsuccessNewDocumentBox}>
+
+      {isLoading && <Loading />}
 
       <div className={styles.contentTitle}>
         <h2>Documento</h2>

@@ -7,6 +7,7 @@ import { HandleErrorResponseApi, HandleValueData } from "../../Utils/utils";
 import styles from "./styles.module.scss"
 import $ from "jquery"
 import "jquery-mask-plugin/dist/jquery.mask.min"
+import { Loading } from "../../components/Load";
 
 type FormInputs = {
   document_id: string
@@ -62,16 +63,20 @@ export const TaxesOnDocument = () => {
 
   useEffect(() => {
     const getDocuments = async () => {
-      const { data } = await api.get(`/select_document/${id}`) as IResponseData
-      
-      setLoading(false)
-      setDocument(data)
-      setValue("calculation_basis", Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2 }).format(data.value))
+      await api.get(`/select_document/${id}`).then(response => {
+        const { data } = response as IResponseData
+        setDocument(data)
+        setValue("calculation_basis", Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2 }).format(data.value))
+        setLoading(false)
+      }).catch(error => {
+        setLoading(false)
+        HandleErrorResponseApi(error)
+      })
     }
 
-    getDocuments().catch(error => HandleErrorResponseApi(error))
+    getDocuments()
 
-  }, [isLoading, update])
+  }, [update])
 
   useEffect(() => {
     $(".value").mask("#.##0,00", { 
@@ -87,8 +92,8 @@ export const TaxesOnDocument = () => {
 
     await api.post("/taxes/document", data).then(() => {
       reset()
-      setLoading(false)
       setUpdate(update+1)
+      setLoading(false)
     }).catch(error => {
       setLoading(false)
       setUpdate(update+1)
@@ -100,26 +105,24 @@ export const TaxesOnDocument = () => {
     setLoading(true)
     await api.post("/taxe/remove/document", data).then(response => {
       reset()
-      setLoading(false)
       setUpdate(update+1)
-    }).catch(error => HandleErrorResponseApi(error))
+      setLoading(false)
+    }).catch(error => {
+      setLoading(false)
+      HandleErrorResponseApi(error)
+    })
   }
 
   return (      
     <div className={styles.contentBoxTaxesOnDocument}>
 
-      <div className={styles.contentTitleForm}>
+      {isLoading && <Loading />}
 
+      <div className={styles.contentTitleForm}>
         <div className={styles.contentTitle}>
           <h2>Gerir Documento</h2>
           <span>Deduções | Descontos | Acréscimos</span>
         </div>
-
-        {isLoading && 
-        <div className={`${styles.contentLoad} animate__animated animate__flash animate__infinite animate__slow`} >
-          <span>Carregando...</span>
-        </div> }
-
       </div>
 
       <div className={styles.contentDataDocument}>

@@ -16,7 +16,7 @@ export const Topbar = () => {
         <div className={styles.contentLogo}>
           {user?.unity 
             ? <span>{user.unity.name}</span> 
-            : <strong className="animate__animated  animate__flash animate__infinite" >ERROR</strong>}
+            : <strong className="animate__animated  animate__flash animate__infinite" >carregando</strong>}
           <span>{user?.name}</span>
         </div>
 
