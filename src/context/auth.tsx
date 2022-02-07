@@ -1,4 +1,5 @@
 import { createContext, ReactNode, useState, useEffect } from "react"
+import { Loading } from "../components/Load"
 import { api } from "../services"
 import { HandleErrorResponseApi } from "../Utils/utils"
 
@@ -38,6 +39,7 @@ type AuthResponse = {
 export const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider(props: AuthProvider) {
+  const [isLoading, setLoading] = useState<boolean>(false)
   const [user, setUser] = useState<User | null>(null)
   const token = localStorage.getItem('@financeiro:token')
   api.defaults.headers.common['Authorization'] = `Bearer ${token}`
@@ -48,33 +50,48 @@ export function AuthProvider(props: AuthProvider) {
   }
 
   async function signIn(tokenCredential: ITokenCredential) {
-    console.log(tokenCredential)
-
+    setLoading(true)
     const { credential } = tokenCredential
 
     await api.post<AuthResponse>("/user", { credential }).then(response => {
-      const { token, user } = response.data
+      const { token, user } = response.data 
 
       localStorage.setItem('@financeiro:token', token)
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`
       setUser(user)
+      setLoading(false)
 
-    }).catch(error => HandleErrorResponseApi(error))
+    }).catch(error => {
+
+      setLoading(false)
+      HandleErrorResponseApi(error)
+
+    })
     
   }
 
   useEffect(() => {
     const signInUser = async () => {
       if(token) {
-        const response = await api.get<User>("profile")
-        setUser(response.data)
+        await api.get<User>("profile").then(response => {
+          const { data } = response
+          console.log(data)
+          setUser(data)
+          setLoading(false)
+        }).catch(error => {
+          setLoading(false)
+          HandleErrorResponseApi(error)
+        })
       }
     }
-    signInUser().catch(error => HandleErrorResponseApi(error))
+
+    signInUser()
+
   }, [localStorage])
 
   return (
     <AuthContext.Provider value={{ signIn, user, signOut }}>
+      {isLoading && <Loading /> }
       {props.children}
     </AuthContext.Provider>
   )

@@ -62,6 +62,7 @@ export const TaxesOnDocument = () => {
   })
 
   useEffect(() => {
+    setLoading(true)
     const getDocuments = async () => {
       await api.get(`/select_document/${id}`).then(response => {
         const { data } = response as IResponseData

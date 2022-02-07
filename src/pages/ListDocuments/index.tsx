@@ -93,7 +93,7 @@ export const ListDocuments = () => {
 
   return (
     <div className={styles.contentBoxListDocuments}>
-      {isLoading && <Loading />}
+      { isLoading && <Loading /> }
       <div className={styles.contentTitleListDocuments}>
         <div className={styles.contentDateDocument}>
           <h2>Documentos</h2>
