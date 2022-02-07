@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { api } from "../../services"
 import styles from "./styles.module.scss"
 import { format, parseISO } from "date-fns"
@@ -6,6 +6,7 @@ import { CurrencyFormat, HandleErrorResponseApi } from "../../Utils/utils"
 import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { Loading } from "../../components/Load"
+import { AuthContext } from "../../context/auth"
 
 interface Creditor {
   name: string
@@ -46,6 +47,8 @@ export const ListDocuments = () => {
   const [take, setTake] = useState<number>(8)
   const [document, setDocument] = useState<IDocumentData[]>([])
   const navigate = useNavigate()
+  const { updateState } = useContext(AuthContext)
+
   const { 
     handleSubmit, 
     register, 
@@ -66,6 +69,7 @@ export const ListDocuments = () => {
       }).then(response => {
         const { data } = response as IDataDocumentResponse
         setDocument(data)
+        updateState()
         setLoading(false)
       }).catch(error => {
         setLoading(false)

@@ -24,7 +24,8 @@ interface ITokenCredential {
 type AuthContextData = {
   user: User | null
   signIn: (response: ITokenCredential) => void
-  signOut: () => void
+  signOut: () => void,
+  updateState: () => void
 }
 
 type AuthProvider = {
@@ -41,12 +42,18 @@ export const AuthContext = createContext({} as AuthContextData)
 export function AuthProvider(props: AuthProvider) {
   const [isLoading, setLoading] = useState<boolean>(false)
   const [user, setUser] = useState<User | null>(null)
+  const [update, setUpdate] = useState<number>(0)
   const token = localStorage.getItem('@financeiro:token')
   api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
   const signOut = () => {
     setUser(null)
     localStorage.removeItem('@financeiro:token')
+  }
+
+  const updateState = () => {
+    setUpdate(update+1)
+    console.log("atualizado")
   }
 
   async function signIn(tokenCredential: ITokenCredential) {
@@ -74,23 +81,26 @@ export function AuthProvider(props: AuthProvider) {
     const signInUser = async () => {
       if(token) {
         await api.get<User>("profile").then(response => {
+
           const { data } = response
-          console.log(data)
           setUser(data)
           setLoading(false)
+
         }).catch(error => {
+
           setLoading(false)
           HandleErrorResponseApi(error)
+
         })
       }
     }
 
     signInUser()
 
-  }, [localStorage])
+  }, [localStorage, update])
 
   return (
-    <AuthContext.Provider value={{ signIn, user, signOut }}>
+    <AuthContext.Provider value={{ signIn, user, signOut, updateState }}>
       {isLoading && <Loading /> }
       {props.children}
     </AuthContext.Provider>
