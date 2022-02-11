@@ -77,7 +77,7 @@ export const ExtractDocument = () => {
   return (
     <div>
 
-      {isLoading && <Loading />}
+      { isLoading && <Loading /> }
       
       {id_documents.length === 0 && 
         <div className={styles.contentAlertExtractEmpty}>

@@ -107,15 +107,14 @@ export const UpdateDocument = () => {
     $("#code").mask(SPMaskBehavior)
   })
 
-  return (      
+  return (    
     <div className={styles.formDocumentBox}>
+
+      { isLoading && <Loading /> }
 
       <div className={styles.contentTitleForm}>
         <h2>Alterar Documento</h2>
-        <span>[Nota Fiscal, Fatura]</span>
-
-        {isLoading && <Loading />}
-        
+        <span>Edição de documento</span>        
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">

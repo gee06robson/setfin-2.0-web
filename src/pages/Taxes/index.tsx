@@ -116,8 +116,8 @@ export const TaxesOnDocument = () => {
 
   return (      
     <div className={styles.contentBoxTaxesOnDocument}>
-
-      {isLoading && <Loading />}
+      
+      { isLoading && <Loading /> }
 
       <div className={styles.contentTitleForm}>
         <div className={styles.contentTitle}>

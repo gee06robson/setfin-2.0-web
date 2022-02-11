@@ -73,14 +73,13 @@ export const NewDocument = () => {
   return (      
     <div className={styles.formDocumentBox}>
 
+    { isLoading && <Loading /> }
+
       <div className={styles.contentTitleForm}>
         <div className={styles.contentTitleText}>
           <h2>Cadastro de Documentos</h2>
           <span>[Nota Fiscal, Fatura]</span>
         </div>
-
-        {isLoading && <Loading />}
-
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
@@ -198,10 +197,17 @@ export const NewDocument = () => {
         </div>
 
         <div className={styles.contentButton}>
+
+          <button type="button" onClick={() => navigate(-1)} >
+            <span>Início</span>
+          </button>
+
           <button type="submit">
             <span>Cadastrar</span>
           </button>
+
         </div>
+        
       </form>
     </div> 
   )

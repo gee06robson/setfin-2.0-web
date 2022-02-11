@@ -3,40 +3,25 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 150 92" style="enable-background:new 0 0 150 92;" xml:space="preserve">
 <style type="text/css">
-	.st0{opacity:0.65;fill:url(#SVGID_1_);}
-	.st1{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
-	.st2{fill:#FFFFFF;stroke:#333333;stroke-linecap:round;stroke-miterlimit:10;stroke-dasharray:5;}
-	.st3{fill:#3A3A49;stroke:#3A3A49;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:10;}
-	.st4{fill:none;stroke:#333333;stroke-width:0.25;stroke-linejoin:round;stroke-miterlimit:10;}
-	
-		.st5{fill:#3A3A49;stroke:#3A3A49;stroke-width:0.25;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-dasharray:1;}
-	.st6{fill:#4D4D4D;stroke:#3A3A49;stroke-miterlimit:10;}
-	.st7{fill:#FFFFFF;stroke:#3A3A49;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st0{opacity:0.65;fill:url(#SVGID_1_);enable-background:new    ;}
+	.st1{opacity:0.32;fill:#915CE6;enable-background:new    ;}
 </style>
 <g id="Camada_1">
-	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0.1889" y1="46.1333" x2="150" y2="46.1333">
-		<stop  offset="0" style="stop-color:#DFDCFD"/>
-		<stop  offset="0.2957" style="stop-color:#E3D9F8"/>
-		<stop  offset="0.6682" style="stop-color:#EDD2E8"/>
-		<stop  offset="1" style="stop-color:#FBC8D4"/>
-	</linearGradient>
-	<rect x="0.2" y="0.3" class="st0" width="149.8" height="91.7"/>
-	<path class="st1" d="M53.5,13.5"/>
-	<path class="st2" d="M145.5,28.5"/>
-	<path class="st3" d="M6.2,7.5c0,2,0,4,0,6c0.2,0,0.4,0,0.5,0c0-1,0-2,0-3s0-2,0-3C6.6,7.5,6.4,7.5,6.2,7.5z"/>
-	<path class="st3" d="M3.5,10.8c2,0,4,0,6,0c0-0.2,0-0.4,0-0.5c-1,0-2,0-3,0s-2,0-3,0C3.5,10.4,3.5,10.6,3.5,10.8z"/>
-	<circle class="st3" cx="17" cy="13" r="1.5"/>
-	<line class="st4" x1="31" y1="13" x2="31" y2="13"/>
-	<circle class="st3" cx="13.4" cy="14.6" r="1"/>
-	<circle class="st3" cx="16.8" cy="18.2" r="2"/>
-	<circle class="st3" cx="20.8" cy="16.2" r="1"/>
-	<path class="st3" d="M141,68.8c0,2,0,4,0,6c0.2,0,0.4,0,0.5,0c0-1,0-2,0-3s0-2,0-3C141.3,68.8,141.2,68.8,141,68.8z"/>
-	<path class="st3" d="M138.2,72.1c2,0,4,0,6,0c0-0.2,0-0.4,0-0.5c-1,0-2,0-3,0s-2,0-3,0C138.2,71.7,138.2,71.9,138.2,72.1z"/>
-	<path class="st5" d="M16,74"/>
-	<path class="st6" d="M6.9,88h13.8c1.7,0,3.1-1.8,3.1-4l0,0c0-2.2-1.4-4-3.1-4H6.9c-1.7,0-3.1,1.8-3.1,4l0,0C3.8,86.2,5.1,88,6.9,88
-		z"/>
-	<circle class="st7" cx="20.8" cy="84" r="5"/>
+	<g id="Camada_2_00000040567374427684707530000006433456125296910977_">
+		
+			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0.1" y1="-5.95" x2="149.9" y2="-5.95" gradientTransform="matrix(1 0 0 1 0 52)">
+			<stop  offset="0" style="stop-color:#DFDCFD"/>
+			<stop  offset="0.2957" style="stop-color:#E3D9F8"/>
+			<stop  offset="0.6682" style="stop-color:#EDD2E8"/>
+			<stop  offset="1" style="stop-color:#FBC8D4"/>
+		</linearGradient>
+		<rect x="0.1" y="0.2" class="st0" width="149.8" height="91.7"/>
+	</g>
 </g>
 <g id="Camada_2">
+	<path class="st1" d="M90.8,13.8H14.6C7.1,13.8,1,7.7,1,0.2l0,0c0-7.5,6.1-13.6,13.6-13.6h76.2c7.5,0,13.6,6.1,13.6,13.6l0,0
+		C104.3,7.7,98.3,13.8,90.8,13.8z"/>
+	<path class="st1" d="M143.1,105.6H66.8c-7.5,0-13.5-6-13.5-13.5l0,0c0-7.5,6.1-13.6,13.6-13.6h76.2c7.5,0,13.6,6.1,13.6,13.6l0,0
+		C156.6,99.6,150.5,105.6,143.1,105.6z"/>
 </g>
 </svg>

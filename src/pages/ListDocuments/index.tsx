@@ -97,16 +97,22 @@ export const ListDocuments = () => {
 
   return (
     <div className={styles.contentBoxListDocuments}>
+
       { isLoading && <Loading /> }
+
       <div className={styles.contentTitleListDocuments}>
+
         <div className={styles.contentDateDocument}>
           <h2>Documentos</h2>
           <span>Aqui estão listados todos os documentos cadastrados em sua subunidade</span>
         </div>
+
         <div className={styles.contentFilterButtons}>
+
           <button type="button" onClick={() => navigate("/financial/home")} >
             <span>início</span>
           </button>
+
           <button type="button" onClick={() => navigate("/financial/document/new")} >
             <span>novo documento</span>
           </button>
@@ -121,13 +127,15 @@ export const ListDocuments = () => {
       </div>
 
       <div className={styles.contentListBox}>
+
         <div className={styles.contentDocumentList}>
+
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
           {document?.map(document => (  
             <div className={styles.cardDocument} key={document.id}>
 
               <input type="checkbox" {...register("id")} value={document.id} />
-
+              
               <button type="button" className={styles.documentRedirect} onClick={() => navigate(`/financial/document/success/${document.id}`)} >
                 <span>{document.number}</span>
               </button>
@@ -151,16 +159,23 @@ export const ListDocuments = () => {
 
           {watchAllFields.id.length > 0 && 
             <div className={`${styles.contentBarButtonForm} animate__animated  animate__fadeInUp`}>
-              <button type="submit">
-                <span>Extrato</span>
-              </button>
+
+              <div className={styles.contentFormButtons} >
+                <button type="submit">
+                  <span>Extrato</span>
+                </button>
+              </div>
+
               <button type="button">
                 <span>{watchAllFields.id.length}</span>
               </button>
+              
             </div>
           }
           </form>
+
         </div>
+
       </div>
     </div>
   )

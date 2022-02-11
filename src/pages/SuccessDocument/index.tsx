@@ -40,6 +40,19 @@ export const SuccessDocument = () => {
   const [document, setDocument] = useState<IDocumentData | null>(null)
   const { id } = useParams()
   const navigate = useNavigate()
+
+  const removeDocument = async () => {
+    setLoading(true)
+    await api.post("/document/delete", {
+      id
+    }).then(response => {
+      console.log(response.data)
+      navigate(-1)
+    }).catch(error => {
+      setLoading(false)
+      HandleErrorResponseApi(error)
+    })
+  }
   
   useEffect(() => {
     const getDocument = async () => {
@@ -67,9 +80,8 @@ export const SuccessDocument = () => {
   }, [])
 
   return (
+    isLoading ? <Loading /> :
     <div className={styles.formsuccessNewDocumentBox}>
-
-      {isLoading && <Loading />}
 
       <div className={styles.contentTitle}>
         <h2>Documento</h2>
@@ -141,7 +153,7 @@ export const SuccessDocument = () => {
         </button>
 
         <button type="button">
-          <span>Empenho</span>
+          <span>DOC SIAFI</span>
         </button>
 
       </div>
@@ -157,6 +169,10 @@ export const SuccessDocument = () => {
           </div>
         </div> 
       </div>
+
+      <button type="button" className={styles.deleteButton} onClick={() => removeDocument()}>
+        <span>Excluir</span>
+      </button>
   
     </div>
   )
