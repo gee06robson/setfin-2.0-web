@@ -85,7 +85,7 @@ export const SuccessDocument = () => {
 
       <div className={styles.contentTitle}>
         <h2>Documento</h2>
-        <span>Inclua impostos, nota de empenho ou retorne ao cadastro de documentos</span>
+        <span>Inclua impostos, altere os dados fornecidos, adicione documentos gerados no SIAFI como <strong>(NS, NP, NE, OB, ...)</strong></span>
       </div>
 
       <div className={styles.contentResponseData}>
@@ -114,22 +114,26 @@ export const SuccessDocument = () => {
           </div>
         </div>
 
-        <div className={styles.contentTextBox}>
-          <span>Emissão</span>
-          <div className={styles.contentText}>
-            <ImOpt color="#4C5948" />
-            <span>{document?.emission}</span>
-          </div>
-        </div>
+        <div className={styles.contentBoxDataDobleText}>
 
-        {document?.due_date && 
-        <div className={styles.contentTextBox}>
-          <span>Vencimento</span>
-          <div className={styles.contentText}>
-            <ImOpt color="#4C5948" />
-            <span>{document?.due_date}</span>
+          <div className={styles.contentTextBox}>
+            <span>Emissão</span>
+            <div className={styles.contentText}>
+              <ImOpt color="#4C5948" />
+              <span>{document?.emission}</span>
+            </div>
           </div>
-        </div> }
+
+          {document?.due_date && 
+          <div className={styles.contentTextBox}>
+            <span>Vencimento</span>
+            <div className={styles.contentText}>
+              <ImOpt color="#4C5948" />
+              <span>{document?.due_date}</span>
+            </div>
+          </div> }
+
+        </div>
 
         <div className={styles.contentTextBox}>
           <span>Valor</span>

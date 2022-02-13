@@ -10,6 +10,7 @@
 body {
   color: #4C5948;
   background: #e8eaed;
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 700px) {
@@ -32,8 +33,9 @@ button {
   }
 
   @page{ 
-    size: A4 landscape;  
+    size: landscape !important;
   }
+
   body {
     background: #FFFFFF;
   }

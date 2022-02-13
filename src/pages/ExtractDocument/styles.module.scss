@@ -239,7 +239,9 @@ div {
       align-items: center;
       flex-wrap: wrap;
       gap: 2px;
-
+      padding: 0 !important;
+      margin: 0 !important;
+    
       page-break-after: always;
     }
   }

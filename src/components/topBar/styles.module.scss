@@ -151,18 +151,130 @@
         }
       }
 
-      .contentAdmin {
-        height: 100%;
-        padding: 0 10px;
+      .contentMenuUserDropDown {
+        width: 200px;
         display: flex;
         justify-content: center;
-        align-items: center;
+        flex-direction: column;
 
-        span {
-          font-weight: bold;
-          font-size: 14px;
-          border-radius: 12px;
+        position: absolute;
+        top: 53px;
+        right: 10px;
+
+        background-color: #FFFFFF;
+        padding: 20px 20px;
+        gap: 10px;
+        border-radius: 2px;
+        box-shadow: 0 0 2px #333;
+
+        .contentUserAvatarDropDown {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+
+          gap: 10px;
+
+          .cicleAvatarUser {
+            padding: 3px;
+            background: linear-gradient(100deg, #ff008e 0.48%, #ffcd1e 100%);
+            border-radius: 50%;
+            line-height: 0;
+    
+            cursor: pointer;
+    
+            img {
+              width: 96px;
+              height: 96px;
+              border-radius: 50%;
+              border: 3px solid #121214;
+            }
+
+
+            overflow: hidden;
+
+          }
+
+          .userNameText {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            strong {
+              color: #3a3a49;
+            }
+          }
+
         }
+        
+        .contentAdminText {
+          width: 100%;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          box-sizing: border-box;
+
+          padding: 4px 0;
+
+          background-color: rgba(145, 92, 230, .8);
+          border-radius: 12px;
+
+          strong {
+            color: #3a3a49;
+            text-transform: uppercase;
+            font-size: 14px;
+          }
+        }
+
+        .contentMenuUser {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          align-items: center;
+
+          gap: 10px;
+
+          button {
+            width: 100%;
+            border: 0;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+
+            span {
+              font-size: 14px;
+            }
+          }
+        }
+
+        .contentCloseButton {
+          position: absolute;
+          top: 6px;
+          right: 6px;
+
+          button {
+            width: 100%;
+            border: 0;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            cursor: pointer;
+            
+          }
+        }
+
       }
     }
       
