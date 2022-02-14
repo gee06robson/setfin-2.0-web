@@ -12,6 +12,7 @@ export const Login = () => {
   const scriptFlag = VITE_SCRIPT_FLAG as string
   const script = useScript(googleClientScriptURL)
   console.log(VITE_GOOGLE_CLIENT_ID, VITE_GOOGLE_CLIENT_SCRIPT_URL, VITE_SCRIPT_FLAG)
+  console.log(import.meta.env)
   const checkUser = (obj: object | null) => {
     return typeof obj === 'object' && obj !== null
   }
