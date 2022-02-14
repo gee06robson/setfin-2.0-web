@@ -53,11 +53,9 @@ export function AuthProvider(props: AuthProvider) {
 
   const updateState = () => {
     setUpdate(update+1)
-    console.log("atualizado")
   }
 
   async function signIn(tokenCredential: ITokenCredential) {
-    console.log(tokenCredential)
     setLoading(true)
     const { credential } = tokenCredential
 
