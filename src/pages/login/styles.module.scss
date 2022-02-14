@@ -42,6 +42,19 @@
 
         gap: 6px;
 
+        span {
+          white-space: nowrap; 
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        span.textMobile {
+          display: block;
+          text-transform: uppercase;
+          font-weight: bold;
+          color: #312f51;
+        }
+
         span:nth-child(1) {
           font-weight: bold;
           font-size: 18px;
@@ -52,30 +65,24 @@
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+    }
+  }
 
-        a {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          
-          text-decoration: none;
-          
-          background-color: rgb(88, 88, 88);
+  @media only screen and (max-width: 700px) {
 
-          padding: 8px 10px;
-          border-radius: 4px;
-          box-shadow: 0 2px 4px rgb(39, 39, 39);
+    width: 100%;
+    height: 100%;
+    background-color: #FFFF;
+    padding: 10px;
 
-          span {
-            font-weight: bold;
-            color: #babbc2;
-            transition: color 0.5s;
-          }
-        }
+    .loginContentBox  {
+      width: 100%;
+      height: 100%;
 
-        a:hover span {
-          color: #79b4be;
+      .contentTitle {
+        span.textWeb {
+          display: none;
         }
       }
     }
