@@ -11,7 +11,7 @@ export const Login = () => {
   const googleClientScriptURL = VITE_GOOGLE_CLIENT_SCRIPT_URL as string
   const scriptFlag = VITE_SCRIPT_FLAG as string
   const script = useScript(googleClientScriptURL)
-
+  console.log(VITE_GOOGLE_CLIENT_ID, VITE_GOOGLE_CLIENT_SCRIPT_URL, VITE_SCRIPT_FLAG)
   const checkUser = (obj: object | null) => {
     return typeof obj === 'object' && obj !== null
   }
