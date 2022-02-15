@@ -1,6 +1,7 @@
 {
   "name": "web-financeiro",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",

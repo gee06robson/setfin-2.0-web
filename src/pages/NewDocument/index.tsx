@@ -199,7 +199,7 @@ export const NewDocument = () => {
         <div className={styles.contentButton}>
 
           <button type="button" onClick={() => navigate(-1)} >
-            <span>Início</span>
+            <span>Voltar</span>
           </button>
 
           <button type="submit">

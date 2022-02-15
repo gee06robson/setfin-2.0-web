@@ -95,6 +95,9 @@ export const ListDocuments = () => {
     navigate("/financial/document/extract/")
   } 
 
+  useEffect(() => {
+    console.log("teste")
+  }, [])
   return (
     <div className={styles.contentBoxListDocuments}>
 
@@ -117,11 +120,13 @@ export const ListDocuments = () => {
             <span>novo documento</span>
           </button>
 
-          <div className={styles.contentPaginationBox}>
-           <button type="button" onClick={() => setTake(take + 8) }>
-              <span>Mostrando {document.length} resultados</span>
-            </button>
-          </div>
+          <button type="button">
+            <span>Mostrando {document.length} resultados</span>
+          </button>
+
+          <button type="button" onClick={() => setTake(take + 8)}>
+            <span>Mostrar mais</span>
+          </button>
 
         </div>
       </div>

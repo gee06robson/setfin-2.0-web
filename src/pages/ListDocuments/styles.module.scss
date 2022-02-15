@@ -20,9 +20,22 @@
     flex-direction: column;
 
     padding: 10px 20px 0 20px;
-    background: #dfdcfd url(../../assets/img-1.svg) right no-repeat;
+    background: #dfdcfd;
     box-shadow: 0 2px 2px -2px #333333;
     z-index: 1;
+
+    &::after {
+      position: absolute;
+      content: "";
+      width: 150px;
+      height: 92px;
+
+      right: 0;
+      top: 0;
+      z-index: -1;
+
+      background: transparent url(../../assets/img-1.svg) right no-repeat;
+    }
 
     &::before {
       position: absolute;
@@ -42,29 +55,21 @@
       z-index: -1;
     }
 
-    &::after {
-      position: absolute;
-      content: '';
-      background: transparent url(../../assets/img-3.svg) no-repeat center;
-      width: 100px;
-      height: 100px;
-
-      border-radius: 50%;
-
-      left: 250px;
-      top: -20px;
-      z-index: -1;
-    }
-
     .contentDateDocument {
       display: flex;
       flex-direction: column;
       justify-content: center;
 
+      h2 {
+        color: #b9bbbe;
+      }
       span {
         white-space: nowrap; 
         overflow: hidden;
         text-overflow: ellipsis;
+        font-size: 16px;
+        font-weight: bold;
+        color: #0095da;
       }
     }
 
@@ -82,7 +87,7 @@
 
         gap: 4px;
 
-        background-color: #3a3a49;
+        background-color: #312f51;
         border: 0;
         border-radius: 3px;
 
@@ -95,6 +100,15 @@
           font-weight: normal;
           font-size: 0.9rem;
           color: #FFF;
+        }
+
+        &:last-child {
+          background: #f83600;
+
+          span {
+            color: #1c1b29;
+            font-weight: bold;
+          }
         }
       }
     }
@@ -160,10 +174,11 @@
           
           padding: 10px;
 
-          background-color: rgba(91, 41, 228, 0.1);
-          border: 1px solid rgba(232, 234, 237, .5);
+          background-image: linear-gradient(120deg, #8ec5fc 0%, #e0c3fc 100%);
+
+          border: 1px solid #8ec5fc;
           border-radius: 4px;
-          box-shadow: inset 0 0 1px rgba(232, 234, 237, .1), inset 0 0 4px rgba(145, 92, 230, .7);
+          
           box-sizing: border-box;
           cursor: pointer;
 
@@ -173,7 +188,6 @@
           span {
             font-weight: bold;
             color: #3a3a49;
-            text-shadow: 0px 0px 4px rgba(145, 92, 230, .7);
             font-size: 14px;
           }
 
@@ -181,7 +195,7 @@
 
         input:checked ~ button.documentRedirect {
           border: 1px solid rgba(0,117,255, .5);
-          background-color: rgba(85, 153, 255, .2);
+          background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
           box-shadow: inset 0 0 1px rgba(0, 117, 255, .1), 0 0 4px rgba(0, 117, 255, .7);
 
           span {
@@ -249,7 +263,6 @@
           border-radius: 4px;
   
           cursor: pointer;
-          background-color: transparent;
 
           text-transform: uppercase;
           font-weight: bolder;

@@ -2,7 +2,6 @@
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
   flex-direction: column;
 
   background: #FFFFFF url(../../assets/set-fin.svg) no-repeat center;
@@ -13,10 +12,102 @@
 
   .contentHome {
     width: 100%;
+    height: 100vh;
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    padding: 50px 0;
 
+    .contentCard {
+      width: 100%;
+      height: 100%;
+      display: none;
+      gap: 40px;
+
+      padding: 10px;
+
+      .card {
+        width: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        background-image: linear-gradient(-20deg, #e9defa 0%, #fbfcdb 100%);
+
+        box-shadow: 0 0 2px rgb(51, 51, 51, .5);
+        border-radius: 4px;
+      }
+    }
+  }
+
+
+  @media only screen and (max-width: 700px) {
     background-color: #FFFFFF;
+
+    .contentHome {  
+      .contentCard {
+        width: 100%;
+        height: auto;
+        display: flex;
+
+        padding: 10px;
+  
+        .card {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          gap: 20px;
+          padding: 20px;
+          background: #FFFFFF url(../../assets/card-home.svg) no-repeat left;
+  
+          box-shadow: 0 0 2px rgb(51, 51, 51, .5);
+          border-radius: 4px;
+
+          h1 {
+            color: #292841;
+            text-shadow: 0px 0px 2px rgba(255, 255, 255, .7);
+          }
+
+          .contentButton {
+            background-color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 10px;
+
+            cursor: pointer;
+
+            button {
+              border: 0;
+              width: 100%;
+              align-self: flex-start;
+              height: 24px;
+              line-height: 24px;
+        
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              
+              border: 0;
+        
+              padding: 24px;
+        
+              border-radius: 4px;
+              background-image: linear-gradient(120deg, #8ec5fc 0%, #e0c3fc 100%);
+        
+              cursor: pointer;
+
+              span {
+                font-weight: bold;
+                font-size: 14px;
+                text-transform: uppercase;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

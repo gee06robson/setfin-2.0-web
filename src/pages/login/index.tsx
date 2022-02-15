@@ -36,8 +36,10 @@ export const Login = () => {
           size: "large", 
           shape: "square" 
         })
-  
-        await window.google.accounts.id.prompt()
+        
+        if(checkUser(user)===false) {
+          await window.google.accounts.id.prompt()
+        }
   
       }
     }
