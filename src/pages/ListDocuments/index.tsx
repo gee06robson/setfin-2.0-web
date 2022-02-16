@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import { Loading } from "../../components/Load"
 import { AuthContext } from "../../context/auth"
+import { VscRefresh } from "react-icons/vsc"
 
 interface Creditor {
   name: string
@@ -121,10 +122,13 @@ export const ListDocuments = () => {
           </button>
 
           <button type="button">
-            <span>Mostrando {document.length} resultados</span>
+            <span>Mostrando</span>
+            <strong>{document.length} </strong>
+            <span>resultados</span>
           </button>
 
           <button type="button" onClick={() => setTake(take + 8)}>
+            <VscRefresh size={20} />
             <span>Mostrar mais</span>
           </button>
 
@@ -150,14 +154,14 @@ export const ListDocuments = () => {
                 <span>{document.creditor.name}</span>
               </div>
 
-              <span>{format(parseISO(document.emission), "dd/MM/yyyy")}</span>
+              <span><strong>Emissão </strong>{format(parseISO(document.emission), "dd/MM/yyyy")}</span>
 
               {document.due_date 
-                ? <span>{format(parseISO(document.due_date), "dd/MM/yyyy")}</span> 
-                : <span><i>não há</i></span> 
+                ? <span><strong>Vencimento </strong>{format(parseISO(document.due_date), "dd/MM/yyyy")}</span> 
+                : <span><strong>Vencimento </strong><i>não há</i></span> 
               }
               
-              <span>{CurrencyFormat(document.value)}</span>
+              <span><strong>Valor </strong>{CurrencyFormat(document.value)}</span>
               
             </div>
           ))}

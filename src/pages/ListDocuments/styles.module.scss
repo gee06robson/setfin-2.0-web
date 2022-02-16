@@ -1,5 +1,6 @@
 .contentBoxListDocuments {
   width: 100%;
+  min-height: 400px;
   height: 100%;
 
   position: absolute;
@@ -15,6 +16,7 @@
     position: fixed;
 
     width: 100%;
+    min-width: 400px;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -82,7 +84,7 @@
       button { 
         height: 26px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
 
         gap: 4px;
@@ -95,6 +97,7 @@
         
         cursor: pointer;
         
+        strong,
         span {
           text-transform: uppercase;
           font-weight: normal;
@@ -102,11 +105,22 @@
           color: #FFF;
         }
 
+        strong {
+          color: #F7CE4C;
+          font-weight: bold;
+        }
+
+        svg {
+          color: #312f51;
+        }
+
         &:last-child {
-          background: #f83600;
+          justify-content: space-between;
+          gap: 10px;
+          background: #F7CE4C;
 
           span {
-            color: #1c1b29;
+            color: #505b6d;
             font-weight: bold;
           }
         }
@@ -159,6 +173,10 @@
           overflow: hidden;
           text-overflow: ellipsis;
           color: #3a3a49;
+          
+          strong {
+            display: none;
+          }
 
           i {
             color: rgb(248, 106, 80);
@@ -298,6 +316,78 @@
           z-index: -1;
         }
 
+      }
+    }
+  }
+
+  @media only screen and (max-width: 700px) {
+    .contentTitleListDocuments {
+      .contentFilterButtons {
+        display: flex;
+        justify-content: space-between;
+        button {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          span {
+            white-space: nowrap; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          &:nth-child(3){
+            span {
+              display: none;
+            }
+
+            strong {
+              align-self: center;
+            }
+          }
+
+          &:last-child {
+            align-items: center;
+            justify-content: center;
+            span {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    .contentListBox {
+      .contentDocumentList form {
+        .cardDocument {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          gap: 10px;
+
+          span {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            strong {
+              display: block;
+            }
+            i {
+              font-style: normal;
+            }
+          }
+
+          input[type="checkbox"] {
+            align-self: flex-start;
+          }
+
+          button {
+            width: 100%;
+            align-self: flex-end;
+          }
+        }
       }
     }
   }
