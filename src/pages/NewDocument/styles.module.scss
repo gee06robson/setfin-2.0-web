@@ -177,9 +177,18 @@
     max-width: 100%;
     min-height: 100%;
     box-shadow: none;
+    padding: 10px;
+    background-size: cover;
 
     .contentTitleForm  {
-      background-color: #FFF;
+      background-color: transparent;
+      .contentTitleText {
+        background-color: transparent;
+        box-shadow: none;
+        border-radius: 0;
+        border: 0;
+        padding: 0px;
+      }
     }
 
     form {
@@ -201,9 +210,12 @@
       }
 
       .contentButton {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 10px;
+        padding: 0;
         button {
           width: 100%;
-          background-color: #edf2f6;
         }
       }
     }
