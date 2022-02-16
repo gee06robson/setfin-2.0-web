@@ -4,13 +4,13 @@ const { resolve } = require('path')
 const app = express()
 
 
-if(process.env.NODE_env==="production") {
+if(process.env.NODE_ENV==="production") {
 
   app.use(express.static("dist"))
   app.get("*", (req, res) => {
     res.sendFile(resolve(__dirname, './dist', 'index.html'))
   })
-  
+
 }
 
 app.listen(process.env.PORT || 3000, (err) => {
