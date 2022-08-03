@@ -33,6 +33,7 @@ interface IDocumentData {
   due_date: string
   value: number
   units: Units[]
+  searchEngine: string
 }
 
 interface IFormInputs {
@@ -47,8 +48,10 @@ export const ListDocuments = () => {
   const [isLoading, setLoading] = useState<boolean>(true)
   const [take, setTake] = useState<number>(8)
   const [document, setDocument] = useState<IDocumentData[]>([])
+  const [filteredDocument , setFilteredDocument] = useState<IDocumentData[]>([])
   const navigate = useNavigate()
   const { updateState } = useContext(AuthContext)
+  const [search, setSearch] = useState('')
 
   const { 
     handleSubmit, 
@@ -96,12 +99,17 @@ export const ListDocuments = () => {
     navigate("/financial/document/extract/")
   } 
 
-  useEffect(() => {
-    console.log("teste")
-  }, [])
+  const filteredDocs = function(value: string) {
+    setSearch(value);
+    console.log(console.log(value))
+    if (search.length > 0) {
+      setFilteredDocument(document.filter(doc => doc.searchEngine.includes(search)))
+      console.log(document.filter(doc => doc.searchEngine.includes(search)))
+    }
+  }
+
   return (
     <div className={styles.contentBoxListDocuments}>
-
       { isLoading && <Loading /> }
 
       <div className={styles.contentTitleListDocuments}>
@@ -133,38 +141,74 @@ export const ListDocuments = () => {
           </button>
 
         </div>
+
+        <input
+          type="text"
+          onChange={e => filteredDocs(e.target.value.toUpperCase())}
+          value={search}
+          autoComplete="off"
+          placeholder="Buscar" />
+
       </div>
 
       <div className={styles.contentListBox}>
 
         <div className={styles.contentDocumentList}>
-
         <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
-          {document?.map(document => (  
-            <div className={styles.cardDocument} key={document.id}>
+          {search.length > 0 ? (
+            filteredDocument?.map(document => (  
+              <div className={styles.cardDocument} key={document.id}>
+    
+                <input type="checkbox" {...register("id")} value={document.id} />
+                
+                <button type="button" className={styles.documentRedirect} onClick={() => navigate(`/financial/document/success/${document.id}`)} >
+                  <span>{document.number}</span>
+                </button>
 
-              <input type="checkbox" {...register("id")} value={document.id} />
-              
-              <button type="button" className={styles.documentRedirect} onClick={() => navigate(`/financial/document/success/${document.id}`)} >
-                <span>{document.number}</span>
-              </button>
+                <div className={styles.contentCreditor}>
+                  <span>{document.creditor.code}</span>
+                  <span>{document.creditor.name}</span>
+                </div>
 
-              <div className={styles.contentCreditor}>
-                <span>{document.creditor.code}</span>
-                <span>{document.creditor.name}</span>
+                <span><strong>Emissão </strong>{format(parseISO(document.emission), "dd/MM/yyyy")}</span>
+
+                {document.due_date 
+                  ? <span><strong>Vencimento </strong>{format(parseISO(document.due_date), "dd/MM/yyyy")}</span> 
+                  : <span><strong>Vencimento </strong><i>não há</i></span> 
+                }
+                
+                <span><strong>Valor </strong>{CurrencyFormat(document.value)}</span>
+                  
               </div>
+            ))
+          ) : (
+            document?.map(document => (  
+              <div className={styles.cardDocument} key={document.id}>
+    
+                <input type="checkbox" {...register("id")} value={document.id} />
+                
+                <button type="button" className={styles.documentRedirect} onClick={() => navigate(`/financial/document/success/${document.id}`)} >
+                  <span>{document.number}</span>
+                </button>
 
-              <span><strong>Emissão </strong>{format(parseISO(document.emission), "dd/MM/yyyy")}</span>
+                <div className={styles.contentCreditor}>
+                  <span>{document.creditor.code}</span>
+                  <span>{document.creditor.name}</span>
+                </div>
 
-              {document.due_date 
-                ? <span><strong>Vencimento </strong>{format(parseISO(document.due_date), "dd/MM/yyyy")}</span> 
-                : <span><strong>Vencimento </strong><i>não há</i></span> 
-              }
-              
-              <span><strong>Valor </strong>{CurrencyFormat(document.value)}</span>
-              
-            </div>
-          ))}
+                <span><strong>Emissão </strong>{format(parseISO(document.emission), "dd/MM/yyyy")}</span>
+
+                {document.due_date 
+                  ? <span><strong>Vencimento </strong>{format(parseISO(document.due_date), "dd/MM/yyyy")}</span> 
+                  : <span><strong>Vencimento </strong><i>não há</i></span> 
+                }
+                
+                <span><strong>Valor </strong>{CurrencyFormat(document.value)}</span>
+                  
+              </div>
+            ))
+          ) 
+          }
 
           {watchAllFields.id.length > 0 && 
             <div className={`${styles.contentBarButtonForm} animate__animated  animate__fadeInUp`}>

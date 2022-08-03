@@ -22,41 +22,10 @@
     justify-content: center;
     flex-direction: column;
 
-    padding: 10px 20px 0 20px;
+    padding: 10px 20px;
     background: #dfdcfd;
     box-shadow: 0 2px 2px -2px #333333;
     z-index: 1;
-
-    &::after {
-      position: absolute;
-      content: "";
-      width: 150px;
-      height: 92px;
-
-      right: 0;
-      top: 0;
-      z-index: -1;
-
-      background: transparent url(../../assets/img-1.svg) right no-repeat;
-    }
-
-    &::before {
-      position: absolute;
-      content: '';
-      background: transparent url(../../assets/img-4.svg) no-repeat;
-      background-size: 250px auto;
-      background-position: top left;
-      width: 250px;
-      height: 92px;
-
-      border-radius: 0 0 12px 0;
-
-      justify-self: center;
-
-      left: 0;
-      top: 0;
-      z-index: -1;
-    }
 
     .contentDateDocument {
       display: flex;
@@ -64,8 +33,9 @@
       justify-content: center;
 
       h2 {
-        color: #b9bbbe;
+        color: #1c1b29;
       }
+
       span {
         white-space: nowrap; 
         overflow: hidden;
@@ -127,6 +97,22 @@
         }
       }
     }
+
+    input {
+      width: 100%;
+      height: 42px;
+      padding: 0 10px;
+      line-height: 26px;
+
+      border: 0;
+      outline: none;
+
+      border: 1px solid #dfdcfd;
+
+      border-radius: 4px;
+
+      align-self: stretch;
+    }
   }
 
   .contentListBox {
@@ -136,7 +122,7 @@
     box-sizing: border-box;
     background-color: #FFFFFF;
 
-    padding: 80px 0 32px 0;
+    padding: 132px 0 32px 0;
 
     .contentDocumentList form {
       width: 100%;
