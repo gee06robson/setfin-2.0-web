@@ -46,7 +46,7 @@ interface IDataDocumentResponse {
 
 export const ListDocuments = () => {
   const [isLoading, setLoading] = useState<boolean>(true)
-  const [take, setTake] = useState<number>(8)
+  const [take, setTake] = useState<number | undefined>(8)
   const [document, setDocument] = useState<IDocumentData[]>([])
   const [filteredDocument , setFilteredDocument] = useState<IDocumentData[]>([])
   const navigate = useNavigate()
@@ -101,10 +101,12 @@ export const ListDocuments = () => {
 
   const filteredDocs = function(value: string) {
     setSearch(value);
-    console.log(console.log(value))
     if (search.length > 0) {
+      setTake(undefined)
       setFilteredDocument(document.filter(doc => doc.searchEngine.includes(search)))
-      console.log(document.filter(doc => doc.searchEngine.includes(search)))
+    } else if(search.length === 0) {
+      setFilteredDocument([])
+      setTake(8)
     }
   }
 
@@ -135,7 +137,7 @@ export const ListDocuments = () => {
             <span>resultados</span>
           </button>
 
-          <button type="button" onClick={() => setTake(take + 8)}>
+          <button type="button" onClick={() => take && setTake(take + 8)}>
             <VscRefresh size={20} />
             <span>Mostrar mais</span>
           </button>
@@ -147,7 +149,7 @@ export const ListDocuments = () => {
           onChange={e => filteredDocs(e.target.value.toUpperCase())}
           value={search}
           autoComplete="off"
-          placeholder="Buscar" />
+          placeholder="Buscar por Número do Documento, Credor (Código, Nome) e Valor" />
 
       </div>
 
